@@ -6,7 +6,7 @@ import Page from '../layouts/Page.astro';
   <div slot="intro" class="portrait-layout">
     <img class="portrait" src="/images/aurora-constantin.jpg" alt="Dr. Aurora Constantin" width="200" height="200" />
     <div class="identity">
-      <h1>Dr. Aurora Constantin</h1>
+      <h1><span class="honorific">Dr</span>&nbsp;Aurora Constantin</h1>
       <p class="affiliation"><a href="https://people.inf.ed.ac.uk/Aurora_Constantin.html">Lecturer, School of Informatics</a> · University of Edinburgh</p>
       <p class="bio">My research in human–computer interaction brings together education, assistive technology and digital accessibility. I work on technology for autism, participatory and distributed design, multimodal interaction and applied AI.</p>
       <ProfileLinks />
@@ -70,6 +70,7 @@ import Page from '../layouts/Page.astro';
 </Page>
 
 <style>
+  .honorific { margin-inline-end: .045em; }
   .apply-button {
     display: inline-flex;
     align-items: center;
