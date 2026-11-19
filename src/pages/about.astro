@@ -1,0 +1,121 @@
+---
+import ProfileLinks from '../components/ProfileLinks.astro';
+import Page from '../layouts/Page.astro';
+---
+<Page title="About">
+  <div slot="intro" class="portrait-layout">
+    <img class="portrait" src="/images/aurora-constantin.jpg" alt="Dr. Aurora Constantin" width="200" height="200" />
+    <div class="identity">
+      <h1>Dr. Aurora Constantin</h1>
+      <p class="affiliation"><a href="https://people.inf.ed.ac.uk/Aurora_Constantin.html">Lecturer, School of Informatics</a> · University of Edinburgh</p>
+      <p class="bio">My research in human–computer interaction brings together education, assistive technology and digital accessibility. I work on technology for autism, participatory and distributed design, multimodal interaction and applied AI.</p>
+      <ProfileLinks />
+      <address>
+        Room 4.18C, Informatics Forum, 10 Crichton Street, Edinburgh EH8 9AB<br />
+        <a href="mailto:aurora.constantin@ed.ac.uk">aurora.constantin@ed.ac.uk</a><br />
+        <a href="tel:+441316515643">+44 (0)131 651 5643</a>
+      </address>
+    </div>
+  </div>
+  <div class="profile-details">
+    <section class="record supervision">
+      <div>
+        <h2>Student Supervision</h2>
+        <p>I supervise and co-supervise <a href="https://sites.google.com/site/auroraconstantin/student-projects">student projects</a>.</p>
+      </div>
+      <aside class="phd-note" aria-label="PhD enquiries">
+        <p>Thinking about a PhD in digital accessibility, participatory design or educational and assistive technologies? I’d be happy to hear about your ideas.</p>
+        <a class="apply-button" href="https://www.ed.ac.uk/studying/postgraduate/degrees/index.php?r=site/view&amp;edition=2023&amp;id=494">PhD Application Information</a>
+      </aside>
+    </section>
+    <section class="record">
+      <h2>Education</h2>
+      <ul class="dated">
+        <li><strong>2015</strong><span>PhD in Informatics, University of Edinburgh, UK</span></li>
+        <li><strong>2009</strong><span>MSc in IT, University of Glasgow, UK</span></li>
+        <li><strong>2000</strong><span>PhD in Physics, University of Craiova, Romania</span></li>
+        <li><strong>1986</strong><span>BSc in Physics, University of Craiova, Romania</span></li>
+      </ul>
+    </section>
+    <section class="record">
+      <h2>Awards and Professional Activities</h2>
+      <ul class="dated">
+        <li><strong>2024</strong><span>Elected to a three-year term on the University of Edinburgh Senate.</span></li>
+        <li><strong>2023</strong><span>Senior Fellow of the Higher Education Academy.</span></li>
+        <li><strong>2022</strong><span>Awarded a knighthood in Romania’s National Order of Cultural Merit, Section H (scientific research). <a href="https://www.youtube.com/watch?v=Xf5MkgfW2iQ">Watch the ceremony and my speech</a>.</span></li>
+        <li><strong>2019</strong><span>Fellow of the Higher Education Academy.</span></li>
+      </ul>
+    </section>
+    <section class="record">
+      <h2>Roles</h2>
+      <ul>
+        <li>Member of the <a href="https://www.inf.ed.ac.uk/research/aiai/">Artificial Intelligence and its Applications Institute</a>.</li>
+        <li>Coordinator of training for tutors and demonstrators.</li>
+        <li>Lead for the Visiting Undergraduate (VUG) cohort.</li>
+        <li>Coordinator of incoming internships and exchanges.</li>
+        <li>Lead of the Accessibility and Inclusivity Working Group.</li>
+      </ul>
+    </section>
+    <section class="record">
+      <h2>Memberships</h2>
+      <ul>
+        <li>Since 2025 · Champions of Accessibility Network</li>
+        <li>Since 2019 · University of Edinburgh Disabled Staff Network</li>
+        <li>Since 2019 · Scottish Parliament <a href="https://www.parliament.scot/msps/autism.aspx">Cross-Party Group on Autism</a></li>
+        <li>Since 2018 · School of Informatics <a href="https://web.inf.ed.ac.uk/infweb/admin/committees/equality-and-diversity-committee">Equality and Diversity Committee</a></li>
+        <li>Since 2017 · Scottish Parliament <a href="https://www.parliament.scot/msps/disability.aspx">Cross-Party Group on Disability</a></li>
+      </ul>
+    </section>
+  </div>
+</Page>
+
+<style>
+  .apply-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: .6rem 1rem;
+    border-radius: .6rem;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .apply-button:hover, .apply-button:focus-visible { text-decoration: underline; }
+  .identity p { max-width: 64ch; }
+  address { margin-top: 1rem; font-size: .95rem; font-style: normal; color: #47585b; }
+  .portrait-layout, .record {
+    background: white;
+    border: 1px solid #263e4312;
+    border-radius: 1.35rem;
+    box-shadow: 0 2px 4px #18373d08, 0 9px 24px -10px #18373d35;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .profile-details {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.1rem, 2vw, 1.8rem);
+  }
+  .record { overflow-wrap: anywhere; }
+  .record h2 { margin-bottom: 1.25rem; }
+  .record ul, .record p { margin-block: 0; }
+  .supervision {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  .phd-note { border-inline-start: 3px solid var(--accent); padding-inline-start: 1.25rem; }
+  .phd-note p { max-width: 62ch; margin-bottom: 1rem; }
+  ul { padding-left: 1.2rem; }
+  li + li { margin-top: .55rem; }
+  .dated { list-style: none; padding: 0; }
+  .dated li { display: grid; grid-template-columns: 3.5rem 1fr; gap: .5rem; }
+  .dated strong { color: var(--accent); font-variant-numeric: tabular-nums; }
+  @media (max-width: 44rem) {
+    .profile-details, .supervision { grid-template-columns: 1fr; }
+  }
+</style>

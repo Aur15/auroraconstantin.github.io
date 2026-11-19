@@ -1,0 +1,25 @@
+---
+const links = [
+  { label: 'LinkedIn', href: 'https://uk.linkedin.com/in/aurora-constantin-417a2211', path: 'M3 3h18v18H3z M7 10v7 M7 7h.1 M11 17v-7 M11 13c0-4 6-4 6 0v4' },
+  { label: 'Edinburgh Research Explorer (Pure)', href: 'https://www.research.ed.ac.uk/en/persons/aurora-constantin/', path: 'M2 8l10-5 10 5H2z M5 11v7m5-7v7m4-7v7m5-7v7 M2 21h20' },
+  { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=0JJmfykAAAAJ', path: 'M2 9l10-5 10 5-10 5z M6 12v4q6 6 12 0v-4 M22 9v7' },
+  { label: 'CV', href: 'https://drive.google.com/file/d/1FsUqfTuQgTbZo6jUuCZ1cQglNkC_X0uR/view', path: 'M5 2h9l5 5v15H5z M14 2v6h5 M8 12h8m-8 4h6' },
+];
+---
+<div class="profile-icons">
+  {links.map(({ label, href, path }) => (
+    <a href={href} aria-label={label}>
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <path d={path} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" />
+      </svg>
+      <span aria-hidden="true">{label}</span>
+    </a>
+  ))}
+</div>
+<style>
+  .profile-icons { display: flex; flex-wrap: wrap; gap: .5rem; }
+  a { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border-radius: .65rem; background: #edf3f3; }
+  a:hover, a:focus-visible { background: var(--accent); color: white; }
+  span { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 1; width: max-content; max-width: 9rem; padding: .25rem .5rem; border-radius: .3rem; color: white; background: var(--ink); font-size: .85rem; text-align: center; }
+  a:hover span, a:focus-visible span { display: block; }
+</style>
