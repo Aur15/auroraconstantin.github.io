@@ -1,4 +1,5 @@
 :root {
+  --page-gutter: clamp(.875rem, 2.7vw, 2.7rem);
   --ink: #202a2c;
   --accent: #125d70;
   --border: #cad8da;
@@ -9,7 +10,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
-.frame { max-width: 100rem; margin-inline: auto; padding-inline: clamp(1rem, 3vw, 3rem); }
+.frame { max-width: 100rem; margin-inline: auto; padding-inline: var(--page-gutter); }
 a { color: var(--accent); text-underline-offset: .24em; }
 a:hover { text-decoration-thickness: 2px; }
 .frame { padding-block: clamp(1.5rem, 4vw, 3.5rem); }
@@ -45,7 +46,7 @@ h2 { font-size: 1.4rem; }
   letter-spacing: -.045em;
 }
 .affiliation { margin: .7rem 0 0; color: var(--accent); font-weight: 550; }
-.bio { max-width: 55ch; margin: 1.5rem 0 1.25rem; font-size: clamp(1.08rem, 1.5vw, 1.35rem); }
+.bio { margin: 1.5rem 0 1.25rem; font-size: clamp(1.08rem, 1.5vw, 1.35rem); }
 .topic-card {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -73,3 +74,44 @@ h2 { font-size: 1.4rem; }
   .portrait-layout { gap: 1.3rem; }
   .portrait { width: min(9rem, 45vw); }
 }
+
+.archive-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem 1rem;
+  margin-top: 1rem;
+}
+.archive-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.cards section[id] { scroll-margin-top: 1.5rem; }
+.cards a { overflow-wrap: anywhere; }
+.cards ul { padding-inline-start: 1.4rem; }
+.cards li + li { margin-block-start: .55rem; }
+.cards h3 { margin-block: 1.6rem .4rem; }
+.archive-label { color: var(--accent); font-weight: 650; }
+.archive-photo { display: block; max-width: 100%; max-height: 25rem; margin-top: 1rem; }
+.cards details { margin-top: 1.25rem; }
+.cards summary { padding-block: .65rem; color: var(--accent); cursor: pointer; font-weight: 650; }
+
+.cards > section {
+  border-radius: 1.25rem;
+  box-shadow: 0 3px 14px #18373d0c;
+}
+.cards > section > :is(h2, h3):first-child {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+.group-heading { margin-top: 1.4rem; color: var(--accent); }
+.archive-nav { column-gap: .45rem; }
+.archive-nav a {
+  padding-inline: .8rem;
+  border-radius: .6rem;
+  background: white;
+  border: 1px solid var(--border);
+}
+.cards .citations { padding: 0; list-style: none; margin-bottom: 0; }
+.citations li { padding-block: .8rem; }
+.citations li + li { margin: 0; border-top: 1px solid var(--border); }
+.project-topic { font-weight: 600; }
+.project-topic + p { margin-top: .35rem; }

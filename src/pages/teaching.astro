@@ -1,12 +1,34 @@
 ---
 import Page from '../layouts/Page.astro';
-import Card from '../components/Card.astro';
+
+const courses = [
+  { title: 'Informatics Research Review', code: 'INFR11136', level: 'MSc', years: '2023–2025' },
+  { title: 'Informatics Project Proposal', code: 'INFR11147', level: 'MSc', years: '2023–2025' },
+  { title: 'Human–Computer Interaction', code: 'INFR11017', level: 'Level 11, UG4 and MSc', years: '2023–2024' },
+];
 ---
 <Page title="Teaching">
-  <Card title="Courses">
-    <p>Content to follow.</p>
-  </Card>
-  <Card title="Teaching Approach">
-    <p>Content to follow.</p>
-  </Card>
+  {courses.map(course => (
+    <section class="course">
+      <div>
+        <h2>{course.title}</h2>
+        <p>{course.code} · {course.level}</p>
+      </div>
+      <span class="years">{course.years}</span>
+    </section>
+  ))}
 </Page>
+
+<style>
+  .course {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: .5rem 1.5rem;
+  }
+  .course p { margin: .4rem 0 0; color: #47585b; }
+  .years { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+  @media (max-width: 36rem) {
+    .course { grid-template-columns: 1fr; }
+  }
+</style>

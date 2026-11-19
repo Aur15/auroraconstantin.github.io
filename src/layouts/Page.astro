@@ -1,15 +1,15 @@
 ---
 import Header from '../components/Header.astro';
 import '../styles/site.css';
-interface Props { title: string }
-const { title } = Astro.props;
+interface Props { title: string; documentTitle?: string }
+const { title, documentTitle = "Dr. Aurora Constantin" } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dr. Aurora Constantin</title>
+  <title>{documentTitle}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 <body>
@@ -30,5 +30,5 @@ const { title } = Astro.props;
 <style>
   body { display: flex; flex-direction: column; min-height: 100vh; }
   .frame { flex: 1; width: 100%; }
-  footer { border-top: 1px solid var(--border); padding: 1.25rem clamp(1rem, 3vw, 3rem); color: #47585b; font-size: .875rem; text-align: center; }
+  footer { border-top: 1px solid var(--border); padding: 1.25rem var(--page-gutter); color: #47585b; font-size: .875rem; text-align: center; }
 </style>

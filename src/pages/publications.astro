@@ -1,12 +1,100 @@
 ---
 import Page from '../layouts/Page.astro';
-import Card from '../components/Card.astro';
+import records from '../data/publications.json';
+
+const works = [...records].sort((a, b) => b.year - a.year);
+const categories = [...new Set(works.map(work => work.category))].sort();
+const topics = [...new Set(works.flatMap(work => work.topics))].sort();
 ---
 <Page title="Publications">
-  <Card title="Selected Publications">
-    <p>Content to follow.</p>
-  </Card>
-  <Card title="Publication List">
-    <p>Content to follow.</p>
-  </Card>
+  <div class="catalogue">
+    <form hidden class="filters" role="search" aria-label="Filter publications">
+      <label>Search publications<input type="search" name="query" placeholder="Title, author, venue or year" /></label>
+      <label>Work type<select name="category"><option value="">All works</option>{categories.map(c => <option>{c}</option>)}</select></label>
+      <label>Research topic<select name="topic"><option value="">All topics</option>{topics.map(t => <option>{t}</option>)}</select></label>
+      <button type="reset">Clear Filters</button>
+    </form>
+    <p role="status" class="count">{works.length} works</p>
+    <ol class="works" role="list">
+      {works.map(work => (
+        <li data-category={work.category} data-topics={JSON.stringify(work.topics)}>
+          <article>
+            <span class="year">{work.year}</span>
+            <div>
+              <h2>{work.title}</h2>
+              <p>{work.authors}</p>
+              <p class="venue">{work.venue}</p>
+              <div class="resources">
+                {work.links.map(link => (
+                  <a href={link.url} aria-label={link.label + ' — ' + work.title}>{link.label}</a>
+                ))}
+                <a href={'https://scholar.google.com/scholar?q=' + encodeURIComponent(work.title)}
+                   aria-label={'Google Scholar search for ' + work.title}>Google Scholar</a>
+              </div>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </div>
 </Page>
+<script>
+  const form = document.querySelector<HTMLFormElement>('.filters')!;
+  const count = document.querySelector<HTMLElement>('.count')!;
+  const entries = Array.from(document.querySelectorAll<HTMLElement>('.works > li')).map(row => ({
+    row,
+    text: row.querySelector('article')!.textContent!.toLowerCase(),
+    topics: JSON.parse(row.dataset.topics!) as string[],
+  }));
+  function filter() {
+    const values = new FormData(form);
+    const words = String(values.get('query')).trim().toLowerCase().split(/\s+/);
+    const category = values.get('category');
+    const topic = String(values.get('topic'));
+    let total = 0;
+    for (const { row, text, topics } of entries) {
+      row.hidden = !words.every(word => text.includes(word)) ||
+        Boolean(category && category !== row.dataset.category) ||
+        Boolean(topic && !topics.includes(topic));
+      if (!row.hidden) total++;
+    }
+    count.textContent = total ? total + (total === 1 ? ' work' : ' works') : 'No matching works. Try another search or clear the filters.';
+  }
+  form.hidden = false;
+  form.addEventListener('input', filter);
+  form.addEventListener('submit', event => event.preventDefault());
+  form.addEventListener('reset', () => requestAnimationFrame(filter));
+</script>
+<style>
+  .filters, .works { background: white; border: 1px solid var(--border); border-radius: 1rem; }
+  .filters:not([hidden]) { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; padding: clamp(1rem, 2vw, 2rem); }
+  label { display: grid; gap: .35rem; flex: 1 1 12rem; min-width: 0; font-weight: 650; }
+  label:first-child { flex-grow: 2; }
+  input, select, button { font: inherit; min-height: 44px; padding: .5rem .8rem; border: 1px solid #728789; border-radius: .45rem; color: var(--ink); background: white; }
+  input, select { min-width: 0; width: 100%; }
+  .filters button { cursor: pointer; background: var(--accent); border-color: var(--accent); color: white; }
+  .filters button:hover { background: #0d4857; }
+  .count { font-weight: 600; color: #415659; }
+  .works { list-style: none; padding: 0 clamp(1rem, 2vw, 2rem); margin: 0; }
+  .works > li { margin: 0; }
+  .works > li:not([hidden]) ~ li:not([hidden]) { border-top: 1px solid var(--border); }
+  article { display: grid; grid-template-columns: 4rem minmax(0,1fr); gap: 1rem; padding-block: 1.4rem; }
+  .year { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 650; }
+  h2 { font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.35; }
+  article p { margin: .35rem 0 0; }
+  .venue { color: #47585b; font-style: italic; }
+  .resources { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+  .resources a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: .85rem;
+    background: #edf3f3;
+    border-radius: .65rem;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .resources a:hover, .resources a:focus-visible { background: var(--accent); color: white; }
+  @media (max-width: 36rem) { article { grid-template-columns: 1fr; gap: .25rem; } }
+</style>

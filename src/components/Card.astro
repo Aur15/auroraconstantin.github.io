@@ -1,8 +1,9 @@
 ---
-interface Props { title: string }
-const { title } = Astro.props;
+interface Props { title: string; id?: string; level?: 2 | 3 }
+const { title, id, level = 2 } = Astro.props;
+const Heading = level === 3 ? 'h3' : 'h2';
 ---
-<section>
-  <h2>{title}</h2>
+<section id={id}>
+  <Heading>{title}</Heading>
   <slot />
 </section>

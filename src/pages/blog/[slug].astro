@@ -1,0 +1,60 @@
+---
+import Page from '../../layouts/Page.astro';
+import { posts } from '../../data/blog';
+
+export function getStaticPaths() {
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = post;
+---
+<Page title="Blog" documentTitle={post.title + ' · Dr. Aurora Constantin'}>
+  <div slot="intro"><a class="back-link" href="/blog/"><span aria-hidden="true">←</span> Back to Blog</a></div>
+  <article class="essay">
+    <header class="article-header">
+      <h1>{post.title}</h1>
+      {post.subtitle && <p class="subtitle">{post.subtitle}</p>}
+      <p class="author">By Dr. Aurora Constantin</p>
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Page>
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 44px;
+    padding: .5rem 1rem;
+    border-radius: .6rem;
+    background: var(--accent);
+    color: white;
+    font-weight: 650;
+    text-decoration: none;
+  }
+  .back-link:hover, .back-link:focus-visible {
+    background: #0d4857;
+    text-decoration: underline;
+  }
+  .essay {
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 3px 14px #18373d0c;
+  }
+  .article-header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  h1, .prose { font-family: Georgia, serif; }
+  h1 { font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: 1.12; }
+  .subtitle { color: #47585b; margin-top: .8rem; }
+  .author { color: var(--accent); font-weight: 600; margin-top: 1rem; }
+  .prose :global(img) { display: block; width: min(100%, 38rem); height: auto; margin: 1.5rem auto 0; border-radius: .6rem; }
+  .prose { margin-top: 1.5rem; font-size: 1.125rem; line-height: 1.75; }
+  .prose :global(p) { margin: 0 0 1em; }
+  .prose :global(p:last-child) { margin-bottom: 0; }
+  .prose :global(blockquote) {
+    margin: 1.5rem 0;
+    padding-inline-start: 1.25rem;
+    border-inline-start: 3px solid var(--accent);
+  }
+</style>

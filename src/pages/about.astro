@@ -21,7 +21,7 @@ import Page from '../layouts/Page.astro';
     <section class="record supervision">
       <div>
         <h2>Student Supervision</h2>
-        <p>I supervise and co-supervise <a href="https://sites.google.com/site/auroraconstantin/student-projects">student projects</a>.</p>
+        <p>I supervise and co-supervise <a href="/supervision/">student projects</a>.</p>
       </div>
       <aside class="phd-note" aria-label="PhD enquiries">
         <p>Thinking about a PhD in digital accessibility, participatory design or educational and assistive technologies? I’d be happy to hear about your ideas.</p>
@@ -50,9 +50,9 @@ import Page from '../layouts/Page.astro';
       <h2>Roles</h2>
       <ul>
         <li>Member of the <a href="https://www.inf.ed.ac.uk/research/aiai/">Artificial Intelligence and its Applications Institute</a>.</li>
-        <li>Coordinator of training for tutors and demonstrators.</li>
-        <li>Lead for the Visiting Undergraduate (VUG) cohort.</li>
         <li>Coordinator of incoming internships and exchanges.</li>
+        <li>Coordinator of training for tutors and demonstrators.</li>
+        <li>Coordinator and cohort lead for visiting undergraduate students.</li>
         <li>Lead of the Accessibility and Inclusivity Working Group.</li>
       </ul>
     </section>
@@ -83,7 +83,6 @@ import Page from '../layouts/Page.astro';
     text-decoration: none;
   }
   .apply-button:hover, .apply-button:focus-visible { text-decoration: underline; }
-  .identity p { max-width: 64ch; }
   address { margin-top: 1rem; font-size: .95rem; font-style: normal; color: #47585b; }
   .portrait-layout, .record {
     background: white;
@@ -98,7 +97,6 @@ import Page from '../layouts/Page.astro';
     grid-template-columns: minmax(0, 1fr);
     gap: clamp(1.1rem, 2vw, 1.8rem);
   }
-  .record { overflow-wrap: anywhere; }
   .record h2 { margin-bottom: 1.25rem; }
   .record ul, .record p { margin-block: 0; }
   .supervision {
@@ -109,7 +107,7 @@ import Page from '../layouts/Page.astro';
     align-items: start;
   }
   .phd-note { border-inline-start: 3px solid var(--accent); padding-inline-start: 1.25rem; }
-  .phd-note p { max-width: 62ch; margin-bottom: 1rem; }
+  .phd-note p { margin-bottom: 1rem; }
   ul { padding-left: 1.2rem; }
   li + li { margin-top: .55rem; }
   .dated { list-style: none; padding: 0; }
