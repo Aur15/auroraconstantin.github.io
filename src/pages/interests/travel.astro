@@ -1,0 +1,48 @@
+---
+import Card from '../../components/Card.astro';
+import Page from '../../layouts/Page.astro';
+
+const trips = [
+  {
+    destination: 'Amsterdam, Netherlands',
+    date: { value: '2026-10', label: 'October 2026' },
+    description: 'During my sabbatical, I spent five days at the University of Amsterdam. Over the weekend, I caught up with former students and visited the Van Gogh Museum.',
+    image: '/images/amsterdam-1.jpg',
+    imageAlt: 'Aurora viewing a sunflower painting at the Van Gogh Museum.',
+  },
+  {
+    destination: 'Barcelona, Spain',
+  },
+];
+---
+<Page title="Beyond Academia" documentTitle="Travel · Dr. Aurora Constantin">
+  <div slot="intro">
+    <a class="back-link" href="/interests/"><span aria-hidden="true">←</span> Back to Beyond Academia</a>
+    <h1>Travel</h1>
+  </div>
+  {trips.map(({ destination, date, description, image, imageAlt }) => (
+    <Card title={destination}>
+      {date && <div>(<time datetime={date.value}>{date.label}</time>)</div>}
+      {description && <p>{description}</p>}
+      {image && <img class="trip-photo" src={image} alt={imageAlt} />}
+    </Card>
+  ))}
+</Page>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 44px;
+    margin-bottom: .75rem;
+  }
+  .trip-photo {
+    display: block;
+    max-width: 100%;
+    max-height: 25rem;
+    margin-top: 1rem;
+    border-radius: .6rem;
+    object-fit: contain;
+  }
+</style>

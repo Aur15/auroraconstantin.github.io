@@ -6,5 +6,5 @@ export const sections = [
   { slug: 'supervision', name: 'Supervision' },
   { slug: 'events', name: 'Events' },
   { slug: 'blog', name: 'Blog' },
-  { slug: 'interests', name: 'Interests' },
+  { slug: 'interests', name: 'Beyond Academia' },
 ];

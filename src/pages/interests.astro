@@ -2,20 +2,21 @@
 import Page from '../layouts/Page.astro';
 
 const interests = [
-  { title: 'Music', action: 'Listen to my favourite Celtic song on YouTube', href: 'https://www.youtube.com/watch?v=T8LTs8MBRrM', images: ['music'] },
-  { title: 'Painting', action: 'View my paintings on Instagram', href: 'https://www.instagram.com/rorua1/', images: ['painting-3', 'painting-4', 'painting-5'] },
-  { title: 'Reading', action: 'Explore Goodreads reading lists', href: 'https://www.goodreads.com/list', images: ['kite-runner', 'thousand-suns', 'nightingale'] },
+  { title: 'Music', action: 'Listen to my favourite Celtic song on YouTube', href: 'https://www.youtube.com/watch?v=T8LTs8MBRrM', images: ['music.jpg'] },
+  { title: 'Painting', action: 'View my paintings on Instagram', href: 'https://www.instagram.com/rorua1/', images: ['Horses.png', 'romanian-traditional-house.jpeg', 'painting-5.jpg'] },
+  { title: 'Reading', action: 'Explore Goodreads reading lists', href: 'https://www.goodreads.com/list', images: ['kite-runner.jpg', 'thousand-suns.jpg', 'nightingale.jpg'] },
+  { title: 'Travel', action: 'Explore my trips', href: '/interests/travel/', images: ['amsterdam-1.jpg'], imageDirectory: '/images/' },
 ];
 ---
-<Page title="Interests">
-  {interests.map(({ title, action, href, images }) => (
+<Page title="Beyond Academia">
+  {interests.map(({ title, action, href, images, imageDirectory = '/images/interests/' }) => (
     <a class="interest" href={href}>
       <div class:list={['artwork', title.toLowerCase()]} aria-hidden="true">
-        {images.map(image => <img src={'/images/interests/' + image + '.jpg'} alt="" />)}
+        {images.map(image => <img src={imageDirectory + image} alt="" />)}
       </div>
       <div class="caption">
         <h2>{title}</h2>
-        <span>{action} <span aria-hidden="true">↗</span></span>
+        <span>{action} <span aria-hidden="true">{href.startsWith('/') ? '→' : '↗'}</span></span>
       </div>
     </a>
   ))}
@@ -80,6 +81,7 @@ const interests = [
   .reading img { height: 100%; max-width: 32%; object-fit: contain; }
   .reading img:first-child { transform: rotate(-7deg); }
   .reading img:last-child { transform: rotate(7deg); }
+  .travel img { width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 42rem) {
     .interest { grid-template-columns: 1fr; }
     .artwork { height: 10rem; }
