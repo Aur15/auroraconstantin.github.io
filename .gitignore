@@ -1,24 +1,26 @@
-# build output
+# Dependencies and Astro build output
+node_modules/
 dist/
-# generated types
 .astro/
 
-# dependencies
-node_modules/
+# Local editor settings and macOS metadata
+.vscode/
+.idea/
+.DS_Store
+.DS_store
 
-# logs
+# Local environment settings
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Package manager logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.pnpm-debug.log*
 
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
-.DS_Store
-
-# jetbrains setting folder
-.idea/
+# TypeScript incremental build cache
+*.tsbuildinfo
